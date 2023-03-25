@@ -1,31 +1,20 @@
-# Starter pipeline
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
-
 stages:
-  - stage:
-    jobs:
-      - job: 
-        steps:
-        - script: pwd
-        displayName: 'Mostrar en donde estoy cuando ejecuto el pipeline'
+- stage: Exploring_the_agent
+  pool:
+    vmImage: ubuntu-latest
 
-        - script: ls
-          displayName: 'Mostar archivos en la máquina'
+jobs:
+- job: checking_user_and_working_directory
+  steps:
+  - script: pwd
+    displayName:"show current working directory"
+
+  - script: whoami
+    displayName: "check current user"
+- job: printing_funny_messages
+  steps:
+  - script: sudo apt-get install cowsay
+  displayName:"install cowsay for dispalying messages"
